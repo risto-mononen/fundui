@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+
+        <h:panelGroup rendered="#{empty members}">
+            <em>No registered funds.</em>
+        </h:panelGroup>
+
+        <h:form>
+            <p:dataTable var="member" value="#{members}"
+                         sortMode="multiple"
+                         sortBy="member.year3"
+                         sortOrder="descending"
+                         paginator="true" rows="25"
+                         binding="#{table}">
+                <f:facet name="header">
+                    Funds
+                </f:facet>
+                <p:column headerText="Rank">
+                    <h:outputText value="#{table.rowIndex}"/>
+                </p:column>
+                <p:column headerText="Fund" sortBy="#{member.fund}"
+                          filterBy="#{member.fund}"
+                          footerText="contains"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{member.fund}"/>
+                </p:column>
+                <p:column headerText="Rating" sortBy="#{member.rating}"
+                          filterBy="#{member.rating}"
+                          footerText="contains"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{member.rating}"/>
+                </p:column>
+                <p:column headerText="Currency" sortBy="#{member.currency}"
+                          filterBy="#{member.currency}"
+                          footerText="contains"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{member.currency}"/>
+                </p:column>
+                <p:column headerText="NAV" sortBy="#{member.nav}">
+                    <h:outputText value="#{member.nav}"/>
+                </p:column>
+                <p:column headerText="1 Day" sortBy="#{member.day1}">
+                    <h:outputText value="#{member.day1}"/>
+                </p:column>
+                <p:column headerText="3 Month" sortBy="#{member.month3}">
+                    <h:outputText value="#{member.month3}"/>
+                </p:column>
+                <p:column headerText="6 Month" sortBy="#{member.month6}">
+                    <h:outputText value="#{member.month6}"/>
+                </p:column>
+                <p:column headerText="1 Year" sortBy="#{member.year1}">
+                    <h:outputText value="#{member.year1}"/>
+                </p:column>
+                <p:column headerText="3 Year" sortBy="#{member.year3}">
+                    <h:outputText value="#{member.year3}"/>
+                </p:column>
+                <p:column headerText="Date" sortBy="#{member.date}"
+                          filterBy="#{member.date}"
+                          footerText="contains"
+                          filterMatchMode="contains">
+                <h:outputText value="#{member.date}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
